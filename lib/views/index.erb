@@ -13,8 +13,9 @@
       <input type='submit'/>
     </form>
 
-    <% gossips.each do |gossip| %>
+    <% gossips.each_with_index do |gossip, index| %>
       <p>
+        <a href="/gossips/<%= index %>"> <%= index %><br/> </a>
         <%= gossip.author %><br/>
         <%= gossip.content %>
       </p>
