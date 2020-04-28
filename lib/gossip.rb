@@ -31,26 +31,22 @@ class Gossip
     return new_array_of_gossips[id]
   end
 
-  def self.update(id, author, content)
+  def self.update(index, author, content)
 
     # savoir l'index
-    id_row = id
-    new_author = author
-    new_content = content
+    id_row = idex
+    author_new = author
+    content_new = content
 
-    # parcourir tableau et modifier l'element avec l'index 
+    # parcourir tableau et delete le potin avec l'index 
     array_of_gossips = Gossip.all
-    array_of_gossips.each do |gossip|
-      if gossip == gossip[id_row]
-        gossip[0].author << new_author
-        gossip[1].content << new_content
-      end
-    end
+    array_of_gossips.delete(array_of_gossips[id_row])
 
     # et recreer le fichier CSV
     CSV.open("db/gossip.csv", "w") do |csv|
       array_of_gossips.each do |i|
-          csv << [i[0], i[1]]
+        csv << [i[0], i[1]]
+        csv << [author_new, content_new]
       end
     end
   end
